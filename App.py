@@ -26,6 +26,19 @@ promedio_beneficiarios_por_departamento = df.groupby('NombreDepartamentoAtencion
 # Promedio de beneficiarios por municipio
 promedio_beneficiarios_por_municipio = df.groupby('NombreMunicipioAtencion')['CantidadBeneficioConsolidado'].mean()
 
+#Dataframe agrupados para graficos Nivel escolaridad y Discapacidad
+df_agrupado = (
+    df.groupby(['Discapacidad', 'TipoBeneficio'])
+      .size()
+      .reset_index(name='conteo_Discapacidad')
+)
+
+df_agrupado_escolaridad = (
+    df.groupby(['NivelEscolaridad', 'TipoBeneficio'])
+      .size()
+      .reset_index(name='conteo_NivelEscolaridad')
+)
+
 ###############################################################################
 #                            VISUALIZACIÓN EN STREAMLIT                       #
 ###############################################################################
@@ -179,12 +192,101 @@ st.write("CANTIDAD DE BENEFICIARIOS:", df["CantidadDeBeneficiarios"].sum())
 ###############################################################################
 #    GRAFICO BARRAS DE ENERGÍA ACTIVA Y REACTIVA POR AÑO EN MILLONES DE KWH   #
 ###############################################################################
-#Brandon
+with st.container(border=True):
+    st.html('<font size=5><font color=#55883B>Beneficios por estado de discapacidad</font>')
+
+    col5 = st.columns(1)[0]
+
+    with col5:
+        # Ordenar y tomar Top 10
+        df_mayores = df_agrupado.sort_values(
+            by='conteo_Discapacidad',
+            ascending=False
+        ).head(10)
+
+        # Crear figura horizontal con Plotly
+        fig = px.bar(
+            df_mayores,
+            y='TipoBeneficio',
+            x='conteo_Discapacidad',
+            color='Discapacidad',
+            orientation='h',
+            labels={
+                'Discapacidad': 'Estado de discapacidad',
+                'conteo_Discapacidad': 'Cantidad de beneficiarios',
+                'TipoBeneficio': 'Tipo de beneficio'
+            },
+            height=500
+        )
+
+        # Ajustes visuales
+        fig.update_traces(
+            textposition='outside',
+            texttemplate='%{x:,.0f}',
+            hovertemplate=(
+                "<b>Tipo de beneficio:</b> %{y}<br>"
+                "<b>Cantidad beneficiarios:</b> %{x:,}<br>"
+            )
+        )
+
+        fig.update_layout(
+            showlegend=True,
+            margin=dict(l=20, r=20, t=20, b=20),
+            plot_bgcolor="white",
+            xaxis=dict(gridcolor="#E5E5E5"),
+            yaxis=dict(title='Tipo de Beneficio')
+        )
+
+        # Render en Streamlit
+        st.plotly_chart(fig, width='stretch')
+
 
 ###############################################################################
 #    GRAFICO TORTAS DE ENERGÍA ACTIVA Y REACTIVA POR AÑO EN MILLONES DE KWH   #
 ###############################################################################
-#Brandon
+with st.container(border=True):
+    st.html('<font size=5><font color=#55883B>Beneficios por nivel de escolaridad</font>')
+
+    col6 = st.columns(1)[0]
+
+with col6:
+        df_mayores = df_agrupado_escolaridad.sort_values(
+            by='conteo_NivelEscolaridad',
+            ascending=False
+        ).head(25)
+
+        fig = px.bar(
+            df_mayores,
+            y='TipoBeneficio',
+            x='conteo_NivelEscolaridad',
+            color='NivelEscolaridad',
+            orientation='h',
+            labels={
+                'NivelEscolaridad': 'Nivel de escolaridad',
+                'conteo_NivelEscolaridad': 'Cantidad de beneficiarios',
+                'TipoBeneficio': 'Tipo de beneficio'
+            },
+            height=600
+        )
+
+        fig.update_traces(
+            textposition='outside',
+            texttemplate='%{x:,.0f}',
+            hovertemplate=(
+                "<b>Tipo de beneficio:</b> %{y}<br>"
+                "<b>Cantidad beneficiarios:</b> %{x:,}<br>"
+            )
+        )
+
+        fig.update_layout(
+            showlegend=True,
+            margin=dict(l=20, r=20, t=20, b=20),
+            plot_bgcolor="white",
+            xaxis=dict(gridcolor="#E5E5E5"),
+            yaxis=dict(title='Tipo de Beneficio')
+        )
+
+        st.plotly_chart(fig, width='stretch')
 
 ###############################################################################
 #                             MENU EN BARRA LATERAL                           #
