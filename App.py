@@ -156,7 +156,7 @@ with st.container(border=True):
     st.plotly_chart(fig_barras, use_container_width=True)
 
 ###############################################################################
-#           INDICADORES DE ENERGÍA ACTIVA POR AÑO EN MILLONES DE KWH          #
+#           INDICADORES DE GENERO PRESENTES EN EL PROYECTO         #
 ###############################################################################
 st.title("Indicadores")
 st.markdown('<a id="indicadores"></a><br><br>', unsafe_allow_html=True)
@@ -190,7 +190,7 @@ col8.metric(label="% ND", value=f"{nd / total * 100:.1f}%")
 st.write("CANTIDAD DE BENEFICIARIOS:", df["CantidadDeBeneficiarios"].sum())
 
 ###############################################################################
-#    GRAFICO BARRAS DE ENERGÍA ACTIVA Y REACTIVA POR AÑO EN MILLONES DE KWH   #
+#    GRAFICO DE BARRAS SOBRE CANTIDAD DE BENEFICIARIOS POR DISCAPACIDAD  #
 ###############################################################################
 with st.container(border=True):
     st.html('<font size=5><font color=#55883B>Beneficios por estado de discapacidad</font>')
@@ -211,12 +211,14 @@ with st.container(border=True):
             x='conteo_Discapacidad',
             color='Discapacidad',
             orientation='h',
+            
             labels={
                 'Discapacidad': 'Estado de discapacidad',
                 'conteo_Discapacidad': 'Cantidad de beneficiarios',
                 'TipoBeneficio': 'Tipo de beneficio'
             },
-            height=500
+            height=500,
+            color_discrete_sequence=['#C1E899', '#9A6735', '#55883B','#E6F0DC', "#9cca25"]
         )
 
         # Ajustes visuales
@@ -242,7 +244,7 @@ with st.container(border=True):
 
 
 ###############################################################################
-#    GRAFICO TORTAS DE ENERGÍA ACTIVA Y REACTIVA POR AÑO EN MILLONES DE KWH   #
+#    BENEFICIOS OTORGADOS POR NIVEL DE ESCOLARIDAD   #
 ###############################################################################
 with st.container(border=True):
     st.html('<font size=5><font color=#55883B>Beneficios por nivel de escolaridad</font>')
@@ -266,7 +268,8 @@ with col6:
                 'conteo_NivelEscolaridad': 'Cantidad de beneficiarios',
                 'TipoBeneficio': 'Tipo de beneficio'
             },
-            height=600
+            height=600,
+            color_discrete_sequence=['#C1E899', '#9A6735', '#55883B','#E6F0DC', '#9cca25','#43ec7b']
         )
 
         fig.update_traces(
@@ -291,14 +294,14 @@ with col6:
 ###############################################################################
 #                             MENU EN BARRA LATERAL                           #
 ###############################################################################
-import streamlit as st
+# import streamlit as st
 
-# Configuración básica de la página
-st.set_page_config(
-    page_title="PROYECTO FAMILIA EN SU TIERRA",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# # Configuración básica de la página
+# st.set_page_config(
+#     page_title="PROYECTO FAMILIA EN SU TIERRA",
+#     layout="wide",
+#     initial_sidebar_state="expanded"
+# )
 
 # --- Menú lateral ---
 with st.sidebar:
@@ -315,7 +318,8 @@ with st.sidebar:
     ### Recursos útiles
     - [Datos abiertos](https://www.datos.gov.co/Inclusi-n-Social-y-Reconciliaci-n/Beneficiarios-Familias-en-su-tierra/mebh-t5gy/about_data)
     - [Familias en su Tierra](https://prosperidadsocial.gov.co/sgpp/inclusion-productiva/familias-en-su-tierra/)
-    - [GitHub del proyecto](https://github.com/FranckPy/ProyectoData)           ---
+    - [GitHub del proyecto](https://github.com/FranckPy/ProyectoData)          
+    ---
     """)
 
     # Radio para navegación interna (cambia contenido de la página principal)
@@ -331,7 +335,7 @@ with st.sidebar:
 
     - Usa el menú para explorar.
     - Los datos se actualizan en tiempo real.
-    -     ---
+    ---
     """)
 
 # --- Contenido principal ---
