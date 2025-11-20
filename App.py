@@ -291,6 +291,63 @@ with col6:
 
         st.plotly_chart(fig, width='stretch')
 
+
+with st.container(border=True):
+    st.html('<font size=5><font color=#55883B>Heatmap Rango Edad vs Estado Beneficiario</font>')
+
+    col9 = st.columns(1)[0]
+
+    with col9:
+
+        # Asegurar que RangoEdad es categoría
+        df['RangoEdad'] = df['RangoEdad'].astype('category')
+
+        # Tabla cruzada
+        tabla = pd.crosstab(df['RangoEdad'], df['EstadoBeneficiario'])
+
+        # Normalización
+        tabla_norm = tabla.div(tabla.sum(axis=0), axis=1)
+
+        # Transformar a listas ordenadas
+        x_labels = tabla_norm.columns.tolist()
+        y_labels = tabla_norm.index.tolist()
+
+        fig = go.Figure(data=go.Heatmap(
+            z=tabla_norm.values,
+            x=x_labels,
+            y=y_labels,
+            colorscale=[
+                [0.0, '#C1E899'],
+                [0.25, '#9A6735'],
+                [0.5, '#E6F0DC'],
+                [0.75, '#55883B'],
+                [1.0, '#D62728']
+            ],
+            zmin=0,
+            zmax=1,
+            colorbar=dict(title="Proporción")
+        ))
+
+        fig.update_traces(
+            hovertemplate=
+            "<b>RangoEdad:</b> %{y}<br>" +
+            "<b>EstadoBeneficiario:</b> %{x}<br>" +
+            "<b>Relación:</b> %{z:.2f}<extra></extra>"
+        )
+
+        fig.update_layout(
+            width=900,
+            height=600,
+            xaxis_title="Estado Beneficiario",
+            yaxis_title="Rango de Edad",
+            xaxis=dict(tickangle=45),
+            yaxis=dict(type='category')
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+        st.caption("Mueva el cursor sobre las celdas para ver la proporción exacta (Tooltip).")
+
+
 ###############################################################################
 #                             MENU EN BARRA LATERAL                           #
 ###############################################################################
