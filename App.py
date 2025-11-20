@@ -291,7 +291,9 @@ with col6:
 
         st.plotly_chart(fig, width='stretch')
 
-
+#################################################################
+#    GRAFICO RELACION RANGO DE EDAD CON ESTADO BENEFICIARIO     #
+#################################################################
 with st.container(border=True):
     st.html('<font size=5><font color=#55883B>Heatmap Rango Edad vs Estado Beneficiario</font>')
 
