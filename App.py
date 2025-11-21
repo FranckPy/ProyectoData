@@ -80,6 +80,14 @@ Como parte de un enfoque de inclusión social y productiva, FEST opera en divers
 promoviendo la transformación de condiciones de vulnerabilidad.
 """)
 
+st.title("Objetivo")
+st.write("""
+Realizar un análisis integral de la base de datos pública “*Beneficiarios Familias en su Tierra*”, 
+con el fin de caracterizar la población beneficiaria, identificar patrones socioeconómicos, geográficos y demográficos, 
+y evaluar elementos clave del impacto del programa en el contexto de inclusión social y transformación productiva, 
+aplicando técnicas de análisis de datos vistas en el curso.
+""")
+
 st.title("Análisis")
 ###############################################################################
 #                        TAMAÑO DEL CONJUNTO DE DATOS                         #
@@ -404,6 +412,18 @@ with st.sidebar:
     - Los datos se actualizan en tiempo real.
     ---
     """)
+
+st.title("Acerca de este proyecto")
+st.write("""
+Este proyecto es el resultado del trabajo colaborativo desarrollado durante el curso de Análisis de Datos – Nivel Exploratorio, 
+en el marco del Bootcamp de Talento Tech de la Universidad de Antioquia y el Ministerio de la TIC. Cada integrante aplicó los conocimientos adquiridos para transformar datos en 
+insumos estratégicos, desde una perspectiva analítica, ética y orientada a la toma de decisiones.
+
+Más que una aplicación, este trabajo refleja el compromiso, la evolución y la capacidad de adaptación de cada miembro del equipo frente 
+a los retos del análisis de la información.
+
+**Porque cuando el dato se interpreta con sentido, la tecnología deja de ser una herramienta y se convierte en oportunidad.**
+""")
 
 # Pie de página o créditos
 st.markdown("---")
