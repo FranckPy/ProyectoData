@@ -66,6 +66,7 @@ st.caption('''Aplicación desarrollada por:
            
 st.header('Análisis de datos')
 st.subheader('Bootcamp Talento Tech')
+st.markdown('<a id="inicio"></a><br><br>', unsafe_allow_html=True)
 st.title("Inicio")
 # Texto introductorio
 st.markdown("""
@@ -79,7 +80,7 @@ mediante procesos de acompañamiento familiar, fortalecimiento comunitario y apo
 Como parte de un enfoque de inclusión social y productiva, FEST opera en diversos municipios priorizados del país, 
 promoviendo la transformación de condiciones de vulnerabilidad.
 """)
-
+st.markdown('<a id="objetivo"></a><br><br>', unsafe_allow_html=True)
 st.title("Objetivo")
 st.write("""
 Realizar un análisis integral de la base de datos pública “*Beneficiarios Familias en su Tierra*”, 
@@ -87,14 +88,11 @@ con el fin de caracterizar la población beneficiaria, identificar patrones soci
 y evaluar elementos clave del impacto del programa en el contexto de inclusión social y transformación productiva, 
 aplicando técnicas de análisis de datos vistas en el curso.
 """)
-
+st.markdown('<a id="analisis"></a><br><br>', unsafe_allow_html=True)
 st.title("Análisis")
 ###############################################################################
 #                        TAMAÑO DEL CONJUNTO DE DATOS                         #
 ###############################################################################
-
-
-st.markdown('<a id="acerca-de"></a><br><br>', unsafe_allow_html=True)
 with st.container(border=True):
     st.html('<font size=5><font color=#55883B>Acerca del Conjunto de Datos</h2>')
 
@@ -124,7 +122,6 @@ with st.container(border=True):
 ###############################################################################
 #      GRAFICO INTERACTIVO DE BARRAS HORIZONTALES POR DEPARTAMENTO Y GENERO    #
 ###############################################################################
-st.markdown('<a id="evolucion"></a><br><br>', unsafe_allow_html=True)
 with st.container(border=True):
     st.html('<font size=5><font color=#55883B>Beneficiarios por Departamento y Género</font>')
 
@@ -180,28 +177,28 @@ with st.container(border=True):
     )
 
     # --- Cálculos ---
-total = df["CantidadDeBeneficiarios"].sum()
+    total = df["CantidadDeBeneficiarios"].sum()
 
 # Variables con suma por género
-hombres = df[df["Genero"] == "Hombre"]["CantidadDeBeneficiarios"].sum()
-mujeres = df[df["Genero"] == "Mujer"]["CantidadDeBeneficiarios"].sum()
-nd = df[df["Genero"] == "ND"]["CantidadDeBeneficiarios"].sum()
-intersexual = df[df["Genero"] == "Intersexua"]["CantidadDeBeneficiarios"].sum()
+    hombres = df[df["Genero"] == "Hombre"]["CantidadDeBeneficiarios"].sum()
+    mujeres = df[df["Genero"] == "Mujer"]["CantidadDeBeneficiarios"].sum()
+    nd = df[df["Genero"] == "ND"]["CantidadDeBeneficiarios"].sum()
+    intersexual = df[df["Genero"] == "Intersexua"]["CantidadDeBeneficiarios"].sum()
 
 # Mostrar en columnas de Streamlit
-col5, col6, col7, col8 = st.columns(4)
+    col5, col6, col7, col8 = st.columns(4)
 
-col5.metric(label="Hombres", value=f"{hombres:,}")
-col5.metric(label="% Hombres", value=f"{hombres / total * 100:.1f}%")
+    col5.metric(label="Hombres", value=f"{hombres:,}")
+    col5.metric(label="% Hombres", value=f"{hombres / total * 100:.1f}%")
 
-col6.metric(label="Mujeres", value=f"{mujeres:,}")
-col6.metric(label="% Mujeres", value=f"{mujeres / total * 100:.1f}%")
+    col6.metric(label="Mujeres", value=f"{mujeres:,}")
+    col6.metric(label="% Mujeres", value=f"{mujeres / total * 100:.1f}%")
 
-col7.metric(label="Intersexual", value=f"{intersexual:,}")
-col7.metric(label="% Intersexual", value=f"{intersexual / total * 100:.1f}%")
+    col7.metric(label="Intersexual", value=f"{intersexual:,}")
+    col7.metric(label="% Intersexual", value=f"{intersexual / total * 100:.1f}%")
 
-col8.metric(label="No Definido (ND)", value=f"{nd:,}")
-col8.metric(label="% ND", value=f"{nd / total * 100:.1f}%")
+    col8.metric(label="No Definido (ND)", value=f"{nd:,}")
+    col8.metric(label="% ND", value=f"{nd / total * 100:.1f}%")
 
 st.write("CANTIDAD DE BENEFICIARIOS:", df["CantidadDeBeneficiarios"].sum())
 
@@ -257,7 +254,6 @@ with st.container(border=True):
 
         # Render en Streamlit
         st.plotly_chart(fig, width='stretch')
-
 
 ###############################################################################
 #    BENEFICIOS OTORGADOS POR NIVEL DE ESCOLARIDAD   #
@@ -365,7 +361,6 @@ with st.container(border=True):
         st.plotly_chart(fig, use_container_width=True)
         st.caption("Mueva el cursor sobre las celdas para ver la proporción exacta (Tooltip).")
 
-
 ###############################################################################
 #                             MENU EN BARRA LATERAL                           #
 ###############################################################################
@@ -397,11 +392,14 @@ with st.sidebar:
     ---
     """)
 
-    # Radio para navegación interna (cambia contenido de la página principal)
-    menu_opciones = st.radio(
-        "Navega por secciones:", 
-        ('Inicio', 'Análisis', 'Indicadores', 'Acerca de')
-    )
+    # Secciones para navegación interna
+    with st.sidebar.container():
+        st.header("Navega por secciones:")
+        st.markdown('[Inicio](#inicio)')
+        st.markdown('[Objetivo](#objetivo)')
+        st.markdown('[Análisis](#analisis)')
+        st.markdown('[Indicadores](#indicadores')
+        st.markdown('[Acerca de](#acerca-de)')
 
     # Información clave o instrucciones en el menú lateral
     st.markdown("""
@@ -412,7 +410,7 @@ with st.sidebar:
     - Los datos se actualizan en tiempo real.
     ---
     """)
-
+st.markdown('<a id="acerca-de"></a><br><br>', unsafe_allow_html=True)
 st.title("Acerca de este proyecto")
 st.write("""
 Este proyecto es el resultado del trabajo colaborativo desarrollado durante el curso de Análisis de Datos – Nivel Exploratorio, 
