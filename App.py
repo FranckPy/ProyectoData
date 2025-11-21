@@ -160,8 +160,16 @@ with st.container(border=True):
 ###############################################################################
 st.title("Indicadores")
 st.markdown('<a id="indicadores"></a><br><br>', unsafe_allow_html=True)
+
 with st.container(border=True):
-    st.html('<font size=5><font color=#55883B> Participación de Beneficiarios por Género</font>')
+    st.markdown(
+        """
+        <div style='border: 3px solid #55883B; padding: 8px 12px; border-radius: 6px;'>
+            <h3 style='color:#55883B;'>Participación de Beneficiarios por Género</h3>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     # --- Cálculos ---
 total = df["CantidadDeBeneficiarios"].sum()
@@ -395,22 +403,6 @@ with st.sidebar:
     - Usa el menú para explorar.
     - Los datos se actualizan en tiempo real.
     ---
-    """)
-
-# --- Contenido principal ---
-if menu_opciones == 'Inicio':
-    st.title("Bienvenido a la app")
-    st.write("Esta es la página principal donde puedes ver la descripción general.")
-elif menu_opciones == 'Análisis':
-    st.title("Análisis de Datos")
-    st.write("Aquí puedes visualizar gráficos, tablas y análisis interactivos.")
-elif menu_opciones == 'Indicadores':
-    st.title("Indicadores Clave")
-    st.write("Se presentan los indicadores y métricas importantes.")
-elif menu_opciones == 'Acerca de':
-    st.title("Acerca de este proyecto")
-    st.write("""
-    Esta app fue desarrollada como Proyecto Final del Programa de Talento Tech - Región 2.
     """)
 
 # Pie de página o créditos
