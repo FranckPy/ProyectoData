@@ -163,9 +163,8 @@ with st.container(border=True):
 ###############################################################################
 #           INDICADORES DE GENERO PRESENTES EN EL PROYECTO         #
 ###############################################################################
-st.title("Indicadores")
 st.markdown('<a id="indicadores"></a><br><br>', unsafe_allow_html=True)
-
+st.title("Indicadores")
 with st.container(border=True):
     st.markdown(
         """
@@ -398,7 +397,7 @@ with st.sidebar:
         st.markdown('[Inicio](#inicio)')
         st.markdown('[Objetivo](#objetivo)')
         st.markdown('[Análisis](#analisis)')
-        st.markdown('[Indicadores](#indicadores')
+        st.markdown('[Indicadores](#indicadores)')
         st.markdown('[Acerca de](#acerca-de)')
 
     # Información clave o instrucciones en el menú lateral
